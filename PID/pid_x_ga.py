@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 
-from PID.MY_PID import PID
-from PID.my_airplane import Airplane
-from PID.test_control_object import Test
-from GA.MGA import MGA
+from MY_PID import PID
+from my_airplane import Airplane
+from test_control_object import Test
+from MGA import MGA
 import numpy as np
 from random import sample
 
@@ -104,10 +104,12 @@ if __name__ == '__main__':
 
     def F(x):
 
-        if x / 2 - x // 2 == 0.5:
-            return 5
-        else:
-            return 0
+        return -(x*x*x - 2 * x*x)
+
+        # if x / 2 - x // 2 == 0.5:
+        #     return 5
+        # else:
+        #     return 0
 
         # if x < 0.5:
         #     return 0
@@ -121,10 +123,10 @@ if __name__ == '__main__':
     population_size = 100
     cross_rate = np.array([10, 5, 0])
     mutation_rate = 0.1
-    generation_amount = 600
-    PID_RATE = np.array([[0, 230], [0, 100], [0, 100]])
-    # control_object = Airplane(0.01)
-    control_object = Test()
+    generation_amount = 400
+    PID_RATE = np.array([[0, 10], [-5, 5], [-5, 5]])
+    control_object = Airplane(0.01)
+    # control_object = Test()
 
     pid_controller = PID(control_object, 0, 0, 0, F, 0.01, 0.2, 2)
 
@@ -133,12 +135,13 @@ if __name__ == '__main__':
     print("PID: ", best_pid_value)
 
     pid_controller.clear_and_init(*best_pid_value)
+    # pid_controller.clear_and_init(14.79994563, -94.37529224, 3.76736659)
 
     targets_y, my_values_y, t = pid_controller.simulate()
     print("loss: ", pid_controller.get_loss())
 
     plt.subplot(2, 1, 1)
-    plt.ylim(30, 60)
+    # plt.ylim(0, 1)
     plt.plot(fitness_history_list, color="red")
     plt.subplot(2, 1, 2)
     plt.plot(t, my_values_y, color="blue")

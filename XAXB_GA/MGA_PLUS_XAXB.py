@@ -129,14 +129,14 @@ class MGA_XAXB:
         return x, y, count
 
 
-def test():
-    DNA_SIZE = 10  # DNA length
+def test_():
+    DNA_SIZE = 10  # DNA length；要猜幾個數字
     POP_SIZE = 20  # population size
     CROSS_RATE = 0.6  # mating probability (DNA crossover)
     MUTATION_RATE = 0.02  # mutation probability
     N_GENERATIONS_LIMIT = 20000
 
-    xaxb = MGA_XAXB(DNA_SIZE, POP_SIZE, CROSS_RATE, MUTATION_RATE, dna_bank_range=(0, 30))
+    xaxb = MGA_XAXB(DNA_SIZE, POP_SIZE, CROSS_RATE, MUTATION_RATE, dna_bank_range=(0, 30))  # dna_bank：有甚麼數字可以拿來猜，(0, 30) 則是0~29這些數字可以被猜
     print(xaxb.ans)
     x, y, _ = xaxb.evolve(N_GENERATIONS_LIMIT)
 
@@ -151,4 +151,4 @@ def test():
 if __name__ == '__main__':
 
     # for i in range(10):
-    test()
+    test_()

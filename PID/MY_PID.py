@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from PID.my_airplane import Airplane
-from PID.test_control_object import Test
-from PID.control_object import ControlObject
+from my_airplane import Airplane
+from test_control_object import Test
+from control_object import ControlObject
 
 
 class PID:
@@ -108,11 +108,11 @@ if "__main__" == __name__:
     def F(x):
 
         # return 0
-        x = x/2 - x//2
-        if x <= 0.5:
-            return 0
-        else:
-            return 5
+        # x = x/2 - x//2
+        # if x <= 0.5:
+        #     return 0
+        # else:
+        #     return 5
 
         # if x < 0.5:
         #     return 0
@@ -123,19 +123,21 @@ if "__main__" == __name__:
         # else:
         #     return 5
 
+        return -(x*x*x - 2 * x*x)
+        # return (x - 0.2) ** 2
         # return 400/(x**2 + x)
         # return 400*np.exp(-2*x)/(x**2 + x)
         # return 2
 
     # pid_list = [100, 300, 200]
-    pid_list = [100, 5, 0]
+    pid_list = [14.79994563, -94.37529224, 3.76736659]
 
     print("start")
     sample_time = 0.01
-    # pid = PID(Airplane(sample_time), 10, 0, 0, F, sample_time, 0.2, 2)
-    # pid = PID(Airplane(sample_time), *pid_list, F, sample_time, 0.2, 2)
+    # pid = PID(Airplane(sample_time), 1, 0, 0, F, sample_time, 0.2, 2)
+    pid = PID(Airplane(sample_time), *pid_list, F, sample_time, 0.2, 2)
 
-    pid = PID(Test(), *pid_list, F, sample_time, 0.2, 5)
+    # pid = PID(Test(), *pid_list, F, sample_time, 0.2, 5)
 
     targets_y, my_values_y, t = pid.simulate()
     loss_list = pid.get_loss()

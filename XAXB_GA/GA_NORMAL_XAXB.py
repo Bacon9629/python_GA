@@ -121,7 +121,7 @@ if __name__ == '__main__':
     MUTATION_RATE = 0.02  # mutation probability
     N_GENERATIONS_LIMIT = 10000
 
-    xaxb = MGA_XAXB(DNA_SIZE, POP_SIZE, CROSS_RATE, MUTATION_RATE, dna_bank_range=(0, 20))
+    xaxb = MGA_XAXB(DNA_SIZE, POP_SIZE, CROSS_RATE, MUTATION_RATE, dna_bank_range=(0, 30))
     print(xaxb.ans)
     x, y, _ = xaxb.evolve(N_GENERATIONS_LIMIT)
 

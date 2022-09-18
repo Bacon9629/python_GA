@@ -1,4 +1,4 @@
-from PID.control_object import ControlObject
+from control_object import ControlObject
 
 
 class Test(ControlObject):
